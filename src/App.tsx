@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 import Row, { Streamer } from './Row';
@@ -15,14 +15,36 @@ const StreamersList = styled.div`
 `
 
 function App() {
-  // const [data, setData] = useState(streamers);
+  const [data, setData] = useState(streamers);
+
+  useEffect(() => {
+
+    const timer = setInterval(() => {
+      const tmpData = [...data].map((d, i) => {
+        const flag = Math.floor(Math.random() * 3) % 3;
+
+        if (flag) {
+          d.score += Math.floor(Math.random() * 1000);
+        }
+        return d;
+      });
+
+      tmpData.sort((a, b) => b.score - a.score);
+
+      setData(tmpData);
+
+    }, 1000);
+
+    return () => clearInterval(timer);
+
+  }, [data]);
 
 
-  console.log(streamers);
+  // console.log(streamers);
 
   return (
     <StreamersList>
-      {streamers.map((streamer: Streamer, index: number) => {
+      {data.map((streamer: Streamer, index: number) => {
         return <Row streamer={streamer} rank={index + 1}></Row>
 
       })}
