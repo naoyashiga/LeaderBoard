@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
+import Row, { Streamer } from './Row';
+
+import styled from 'styled-components';
+import streamers from './data/data.json';
+
+
+
+
+const StreamersList = styled.div`
+  margin: 0 auto;
+  width: 400px;
+`
+
 function App() {
+  // const [data, setData] = useState(streamers);
+
+
+  console.log(streamers);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StreamersList>
+      {streamers.map((streamer: Streamer, index: number) => {
+        return <Row streamer={streamer} rank={index + 1}></Row>
+
+      })}
+    </StreamersList>
   );
 }
 
