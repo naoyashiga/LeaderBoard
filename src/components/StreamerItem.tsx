@@ -47,7 +47,6 @@ const ItemWrapper: VFC<Props> = (props) => {
   const { streamer, rank, score, prevScore } = props;
 
   return (
-    // <Item key={streamer.userID}>
     <Item>
       <Rank>{rank}</Rank>
       <Avator src={streamer.picture} alt={streamer.displayName} />

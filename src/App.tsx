@@ -2,6 +2,7 @@ import React, { useEffect, useState, useLayoutEffect, useRef } from 'react';
 import './App.css';
 
 import ItemWrapper, { Streamer } from './components/StreamerItem';
+import BarChart from './components/BarChart';
 import Row from './components/Row';
 
 import styled from 'styled-components';
@@ -54,6 +55,7 @@ function App() {
 
         return <Row rank={ranks[index]} key={streamer.userID}>
           <ItemWrapper streamer={streamer} score={scores[index]} prevScore={prevScores[index]} rank={ranks[index]}></ItemWrapper>
+          <BarChart score={scores[index]} maxScore={Math.max(...scores)}></BarChart>
         </Row>
 
       })}
