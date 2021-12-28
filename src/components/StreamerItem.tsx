@@ -14,7 +14,8 @@ export type Streamer = {
 type Props = {
   streamer: Streamer,
   rank: number,
-  score: number
+  score: number,
+  prevScore: number
 };
 
 const Item = styled.div`
@@ -41,17 +42,14 @@ border-radius: 50%;
 `
 
 const ItemWrapper: VFC<Props> = (props) => {
-  const { streamer, rank, score } = props;
-  const prevScoreRef = useRef<number>(score);
-  // const prevRankRef = useRef<number>(rank);
+  const { streamer, rank, score, prevScore } = props;
+  // const prevScoreRef = useRef<number>(score);
 
-  useEffect(() => {
-    prevScoreRef.current = score;
-    // prevRankRef.current = rank;
-  })
+  // useEffect(() => {
+  //   prevScoreRef.current = score;
+  // })
 
-  const prevScore: number = prevScoreRef.current;
-  // const prevRank: number = prevRankRef.current;
+  // const prevScore: number = prevScoreRef.current;
 
   return (
     // <Item key={streamer.userID}>
@@ -60,7 +58,7 @@ const ItemWrapper: VFC<Props> = (props) => {
       <Avator src={streamer.picture} alt={streamer.displayName} />
       <DisplayName>{streamer.displayName}</DisplayName>
       <Score score={score} prevScore={prevScore}></Score>
-      {/* <span> / {prevRank}</span> */}
+      {/* <p>{score} : {prevScore}</p> */}
     </Item>
   )
 };

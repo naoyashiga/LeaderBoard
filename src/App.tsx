@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useEffect, useState, useLayoutEffect, useRef } from 'react';
 import './App.css';
 
 import ItemWrapper, { Streamer } from './components/StreamerItem';
@@ -38,16 +38,35 @@ const addRandomScore = (scores: number[]): number[] => {
   });
 };
 
+const usePrevious = (value: number[]) => {
+  const ref = useRef(value);
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+};
+
 function App() {
   const [data, setData] = useState(streamers);
   const initialScores = streamers.map((d: Streamer) => d.score);
   const [scores, setScores] = useState(initialScores);
   const [ranks, setRanks] = useState(getRanks(initialScores));
+  // const prevScores: number[] = usePrevious(scores);
+
+  const [prevScores, setPrevScores] = useState(initialScores);
 
   useEffect(() => {
 
     const timer = setInterval(() => {
-      setScores((prevScores: number[]) => addRandomScore(prevScores));
+
+
+      setScores((prev: number[]) => {
+
+        setPrevScores(prev);
+
+        return addRandomScore(prev);
+      }
+      );
 
     }, 1500);
 
@@ -66,7 +85,7 @@ function App() {
       {data.map((streamer: Streamer, index: number) => {
 
         return <Row rank={ranks[index]} key={streamer.userID}>
-          <ItemWrapper streamer={streamer} score={scores[index]} rank={ranks[index]}></ItemWrapper>
+          <ItemWrapper streamer={streamer} score={scores[index]} prevScore={prevScores[index]} rank={ranks[index]}></ItemWrapper>
         </Row>
 
       })}
