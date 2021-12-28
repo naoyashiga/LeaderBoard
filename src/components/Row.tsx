@@ -21,8 +21,8 @@ const Row = styled.div.attrs<RowPositionProps>((props) => ({
   positionY: props.rank
 })) <RowPositionProps>`
   position: absolute;
-  left: ${props => -50 * (props.rank)}px;
-  top: ${props => 50 * (props.rank)}px;
+  left: ${props => -50 * (props.rank - 1)}px;
+  top: ${props => 50 * (props.rank - 1)}px;
   // top: 0px;
   // animation-fill-mode: forwards;
   transition: all 0.3s ease 0s;
