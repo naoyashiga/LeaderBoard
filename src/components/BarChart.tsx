@@ -1,4 +1,3 @@
-import React, { useState, VFC, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 type Props = {
@@ -14,14 +13,4 @@ height: 3px;
 background: #f72585;
 transition: all 0.3s ease 0s;
 `
-
-// const BarChartWrapper: VFC<Props> = (props) => {
-//   const { score, maxScore } = props;
-
-//   return (
-//     <BarChart>
-//     </BarChart>
-//   )
-// };
-
 export default BarChart;

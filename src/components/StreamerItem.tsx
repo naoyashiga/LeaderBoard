@@ -1,4 +1,4 @@
-import React, { useState, VFC, useRef, useEffect } from 'react';
+import React, { VFC } from 'react';
 import styled from 'styled-components';
 
 import Score from './Score';

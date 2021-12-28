@@ -1,7 +1,11 @@
 
-import React, { useState, VFC, useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useState, VFC, useRef, useLayoutEffect } from 'react';
 
 import styled from 'styled-components';
+
+/*
+The score numbers change frequently. By using a monospaced font, the numbers are in a consistent position and easy to read.
+*/
 const ScoreStyle = styled.div`
   font-family:monospace, serif;
   text-align: right:
@@ -36,7 +40,6 @@ const Score: VFC<ScoreProps> = (props) => {
   useLayoutEffect(() => {
     const startTime = Date.now();
     idRef.current = requestAnimationFrame(() => loop(startTime));
-
   });
 
   return <ScoreStyle>{displayScore} pt</ScoreStyle>
