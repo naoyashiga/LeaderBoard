@@ -12,7 +12,7 @@ export const addRandomScore = (scores: number[]): number[] => {
     const flag = Math.floor(Math.random() * 10) % 3;
 
     if (flag) {
-      d += Math.floor(Math.random() * 50000);
+      d += Math.floor(Math.random() * 10000);
     }
     return d;
   });

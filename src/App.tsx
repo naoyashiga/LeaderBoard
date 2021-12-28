@@ -3,6 +3,7 @@ import './App.css';
 
 import ItemWrapper, { Streamer } from './components/StreamerItem';
 import BarChart from './components/BarChart';
+import XAxisDescription from './components/XAxisDescription';
 import Row from './components/Row';
 
 import styled from 'styled-components';
@@ -14,8 +15,9 @@ import { getRanks, addRandomScore } from './helpers/Helpers';
 const StreamersList = styled.div`
   margin: 0 auto;
   position: relative;
-  width: 400px;
+  width: 320px;
 `
+
 
 function App() {
   const [data, setData] = useState(streamers);
@@ -48,18 +50,44 @@ function App() {
     setRanks(getRanks(scores));
   }, [scores]);
 
+  const calculateXAxisMax = () => {
+    /*
+    Shows the Streamer score as a bar graph.
+    Dynamically change the maximum value of the X axis.
+    The maximum value of the X-axis is calculated based on the score of the first place.
+
+    ex)
+    1st score: 3500
+    x axis max value: 4000
+    */
+
+    let m = Math.max(...scores);
+    let count = 0;
+
+    while (m > 10) {
+      m /= 10;
+      count = count + 1;
+    }
+
+    return Math.ceil(m) * 10 ** count;
+  };
+
 
   return (
-    <StreamersList>
-      {data.map((streamer: Streamer, index: number) => {
+    <div>
+      <XAxisDescription xAxisMax={calculateXAxisMax()}></XAxisDescription>
+      <StreamersList>
+        {data.map((streamer: Streamer, index: number) => {
 
-        return <Row rank={ranks[index]} key={streamer.userID}>
-          <ItemWrapper streamer={streamer} score={scores[index]} prevScore={prevScores[index]} rank={ranks[index]}></ItemWrapper>
-          <BarChart score={scores[index]} maxScore={Math.max(...scores)}></BarChart>
-        </Row>
+          return <Row rank={ranks[index]} key={streamer.userID}>
+            <ItemWrapper streamer={streamer} score={scores[index]} prevScore={prevScores[index]} rank={ranks[index]}></ItemWrapper>
+            <BarChart score={scores[index]} xAxisMax={calculateXAxisMax()}></BarChart>
+          </Row>
 
-      })}
-    </StreamersList>
+        })}
+      </StreamersList>
+
+    </div>
   );
 }
 

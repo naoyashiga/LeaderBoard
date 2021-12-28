@@ -20,7 +20,11 @@ const Score: VFC<ScoreProps> = (props) => {
     const progress = (Date.now() - startTime) / DURATION;
 
     if (progress < 1) {
-      const s: number = Math.floor(props.prevScore + progress * (props.score - props.prevScore));
+      let s: number = Math.floor(props.prevScore + progress * (props.score - props.prevScore));
+
+      if (s > props.score) {
+        s = props.score;
+      }
       setDisplayScore(s);
     } else {
       setDisplayScore(props.score);
