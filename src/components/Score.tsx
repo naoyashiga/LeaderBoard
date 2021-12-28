@@ -1,10 +1,11 @@
 
-import React, { useState, VFC, useRef, useEffect, useCallback, useLayoutEffect } from 'react';
+import React, { useState, VFC, useRef, useEffect, useLayoutEffect } from 'react';
 
-// const Score = styled.div`
-//   text-align: right:
-// `
-
+import styled from 'styled-components';
+const ScoreStyle = styled.div`
+  font-family:monospace, serif;
+  text-align: right:
+`
 type ScoreProps = {
   score: number,
   prevScore: number
@@ -28,19 +29,13 @@ const Score: VFC<ScoreProps> = (props) => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const startTime = Date.now();
     idRef.current = requestAnimationFrame(() => loop(startTime));
 
   });
-  // useEffect(() => {
-  //   idRef.current = requestAnimationFrame(loop);
-  //   return () => cancelAnimationFrame(idRef.current);
-  // }, []);
 
-  return <div>{displayScore}</div>
-  // return <div>{props.score} : {props.prevScore} : {Math.abs(props.score - props.prevScore)} : {counter}pt</div>
-
+  return <ScoreStyle>{displayScore} pt</ScoreStyle>
 };
 
 export default Score;

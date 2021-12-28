@@ -27,10 +27,11 @@ const Item = styled.div`
 `
 
 const Rank = styled.div`
-  width: 20px;
+  width: 30px;
 `
 
 const DisplayName = styled.div`
+  flex-grow: 2;
   text-align: left;
 `
 
@@ -39,17 +40,11 @@ const Avator = styled.img`
 width: 40px;
 height: 40px;
 border-radius: 50%;
+margin-right: 10px;
 `
 
 const ItemWrapper: VFC<Props> = (props) => {
   const { streamer, rank, score, prevScore } = props;
-  // const prevScoreRef = useRef<number>(score);
-
-  // useEffect(() => {
-  //   prevScoreRef.current = score;
-  // })
-
-  // const prevScore: number = prevScoreRef.current;
 
   return (
     // <Item key={streamer.userID}>
@@ -58,7 +53,6 @@ const ItemWrapper: VFC<Props> = (props) => {
       <Avator src={streamer.picture} alt={streamer.displayName} />
       <DisplayName>{streamer.displayName}</DisplayName>
       <Score score={score} prevScore={prevScore}></Score>
-      {/* <p>{score} : {prevScore}</p> */}
     </Item>
   )
 };

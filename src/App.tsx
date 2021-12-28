@@ -6,7 +6,8 @@ import Row from './components/Row';
 
 import styled from 'styled-components';
 import streamers from './data/data.json';
-import Score from './components/Score';
+
+import { getRanks, addRandomScore } from './helpers/Helpers';
 
 
 const StreamersList = styled.div`
@@ -14,23 +15,6 @@ const StreamersList = styled.div`
   position: relative;
   width: 400px;
 `
-
-const getRanks = (scores: number[]): number[] => {
-  const sortedScores = scores.slice().sort((a, b) => b - a);
-
-  return scores.map((score) => sortedScores.findIndex((e) => e === score)).map((x) => x + 1);
-};
-
-const addRandomScore = (scores: number[]): number[] => {
-  return scores.map((d: number, i) => {
-    const flag = Math.floor(Math.random() * 10) % 3;
-
-    if (flag) {
-      d += Math.floor(Math.random() * 5000);
-    }
-    return d;
-  });
-};
 
 function App() {
   const [data, setData] = useState(streamers);
@@ -66,7 +50,6 @@ function App() {
 
   return (
     <StreamersList>
-      {/* {console.log(data)} */}
       {data.map((streamer: Streamer, index: number) => {
 
         return <Row rank={ranks[index]} key={streamer.userID}>

@@ -7,16 +7,6 @@ type RowPositionProps = {
   // prevRank: number;
 };
 
-
-// const Row = styled.div.attrs<RowPositionProps>((props) => ({
-//   style: {
-//     transform: `translate(0, 100 * ${props.rank}px);`
-//   }
-// })) <RowPositionProps>`
-//   background: #ccc;
-//   transition-duration: 300ms;
-// `;
-
 const Row = styled.div.attrs<RowPositionProps>((props) => ({
   positionY: props.rank
 })) <RowPositionProps>`
@@ -24,9 +14,10 @@ const Row = styled.div.attrs<RowPositionProps>((props) => ({
   // left: ${props => -50 * (props.rank - 1)}px;
   left: 0px;
   top: ${props => 50 * (props.rank - 1)}px;
-  // top: 0px;
-  // animation-fill-mode: forwards;
   transition: all 0.3s ease 0s;
+
+  width: 320px;
+  border-bottom: 1px solid #ccc;
 `;
 
 // const Row = styled.div.attrs<RowPositionProps>((props) => ({
