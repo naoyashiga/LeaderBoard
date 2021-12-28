@@ -26,24 +26,10 @@ const addRandomScore = (scores: number[]): number[] => {
     const flag = Math.floor(Math.random() * 10) % 3;
 
     if (flag) {
-
-      if (Math.random() * 10 < 5) {
-        d += Math.floor(Math.random() * -5000);
-
-      } else {
-        d += Math.floor(Math.random() * 5000);
-      }
+      d += Math.floor(Math.random() * 5000);
     }
     return d;
   });
-};
-
-const usePrevious = (value: number[]) => {
-  const ref = useRef(value);
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
 };
 
 function App() {
@@ -51,7 +37,6 @@ function App() {
   const initialScores = streamers.map((d: Streamer) => d.score);
   const [scores, setScores] = useState(initialScores);
   const [ranks, setRanks] = useState(getRanks(initialScores));
-  // const prevScores: number[] = usePrevious(scores);
 
   const [prevScores, setPrevScores] = useState(initialScores);
 
