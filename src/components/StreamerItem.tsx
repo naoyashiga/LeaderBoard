@@ -1,6 +1,7 @@
-import React, { useState, VFC } from 'react';
+import React, { useState, VFC, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
+import Score from './Score';
 
 export type Streamer = {
   userID: string,
@@ -30,9 +31,6 @@ const DisplayName = styled.div`
   text-align: left;
 `
 
-const Score = styled.div`
-  text-align: right:
-`
 
 const Avator = styled.img`
 width: 40px;
@@ -40,17 +38,22 @@ height: 40px;
 border-radius: 50%;
 `
 
-// type Props = Streamer & Rank;
-
 const ItemWrapper: VFC<Props> = (props) => {
   const { streamer, rank } = props;
+  const prevScoreRef = useRef<number>(streamer.score);
+
+  useEffect(() => {
+    prevScoreRef.current = streamer.score;
+  })
+
+  const prevScore: number = prevScoreRef.current;
 
   return (
     <Item key={streamer.userID}>
       <Rank>{rank}</Rank>
       <Avator src={streamer.picture} alt={streamer.displayName} />
       <DisplayName>{streamer.displayName}</DisplayName>
-      <Score>{streamer.score}pt</Score>
+      <Score score={streamer.score} prevScore={prevScore}></Score>
     </Item>
   )
 };

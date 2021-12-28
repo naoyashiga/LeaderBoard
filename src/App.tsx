@@ -44,10 +44,10 @@ function App() {
 
     const timer = setInterval(() => {
       const tmpData: Streamer[] = [...data].map((d: Streamer, i) => {
-        const flag = Math.floor(Math.random() * 3) % 3;
+        const flag = Math.floor(Math.random() * 10) % 3;
 
         if (flag) {
-          d.score += Math.floor(Math.random() * 10000);
+          d.score += Math.floor(Math.random() * 100);
         }
 
 
